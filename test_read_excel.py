@@ -133,10 +133,10 @@ for curr_row in range(1, rowCount):
     def enter_password():
 
         set_password.clear()
-        set_password.send_keys(Password), time.sleep(2)
+        set_password.send_keys(str(Password)), time.sleep(2)
 
         confirm_password.clear()
-        confirm_password.send_keys(C_Password)
+        confirm_password.send_keys(str(C_Password))
 
     enter_password()
 
