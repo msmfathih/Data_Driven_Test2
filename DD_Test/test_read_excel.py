@@ -3,6 +3,7 @@ import xlrd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+from Locators.Locators import Locators
 from webdriver_manager.chrome import ChromeDriverManager
 
 
@@ -11,28 +12,28 @@ driver.get("http://demo.automationtesting.in/Register.html")
 driver.implicitly_wait(10)
 
 
-first_name = driver.find_element(By.XPATH, "//input[@placeholder='First Name']")
-last_name = driver.find_element(By.XPATH, "//input[@placeholder='Last Name']")
-address = driver.find_element(By.XPATH, "//*[@id='basicBootstrapForm']/div[2]/div/textarea")
-email_address = driver.find_element(By.XPATH, "//body/section[@id='section']/div[1]"
-                                              "/div[1]/div[2]/form[1]/div[3]/div[1]/input[1]")
-
-phone_number  = driver.find_element(By.XPATH, "//*[@id='basicBootstrapForm']/div[4]/div/input")
-gender = driver.find_element(By.NAME, "radiooptions")
-hobby = driver.find_element(By.ID, "checkbox1")
-language_dropdown = driver.find_element(By.ID, "msdd")
-Skill = driver.find_element(By.ID, "Skills")
-
-country = driver.find_element(By.ID, "countries")
-DOB_year = driver.find_element(By.ID, "yearbox")
-# DOB_month = driver.find_element(By.ID, "//*[@id='basicBootstrapForm']/div[11]/div[2]/select")
-DOB_date = driver.find_element(By.ID, "daybox")
-set_password = driver.find_element(By.ID, "firstpassword")
-confirm_password = driver.find_element(By.ID, "secondpassword")
-submit_button = driver.find_element(By.XPATH, "//button[@id='submitbtn']")
+first_name = driver.find_element(By.XPATH, Locators.first_name)
+last_name = driver.find_element(By.XPATH, Locators.last_name)
+address = driver.find_element(By.XPATH, Locators.address)
+email_address = driver.find_element(By.XPATH, Locators.email_address)
+phone_number  = driver.find_element(By.XPATH, Locators.phone_number)
 
 
-workbook = xlrd.open_workbook("Datafile.xlsx")
+gender = driver.find_element(By.NAME, Locators.gender)
+hobby = driver.find_element(By.ID, Locators.hobby)
+language_dropdown = driver.find_element(By.ID, Locators.language_dropdown)
+Skill = driver.find_element(By.ID, Locators.select_skill)
+
+country = driver.find_element(By.ID, Locators.country)
+DOB_year = driver.find_element(By.ID, Locators.DOB_year)
+# DOB_month = driver.find_element(By.ID, '//*[@id="basicBootstrapForm"]/div[11]/div[2]/select')
+DOB_date = driver.find_element(By.ID, Locators.DOB_date)
+set_password = driver.find_element(By.ID, Locators.set_password)
+confirm_password = driver.find_element(By.ID, Locators.confirm_password)
+submit_button = driver.find_element(By.XPATH, Locators.submit_button)
+
+
+workbook = xlrd.open_workbook("../Datafile.xlsx")
 sheet = workbook.sheet_by_name("login")
 
 #get total number of rows
@@ -58,7 +59,6 @@ for curr_row in range(1, rowCount):
 
 
     def enter_values():
-        # print(FirstName + LastName)
         first_name.clear()
         first_name.send_keys(FirstName), time.sleep(1)
 
@@ -139,18 +139,8 @@ for curr_row in range(1, rowCount):
         confirm_password.send_keys(str(C_Password))
 
     enter_password()
-
-
-
-
-
-
-
-
     submit_button.click()
-
-
-    time.sleep(5)
+    time.sleep(2)
 
 
 
